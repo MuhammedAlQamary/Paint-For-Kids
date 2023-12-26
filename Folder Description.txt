@@ -1,0 +1,27 @@
+This files describes the contents of the project folder
+
+Programming Fundamental project.pdf:
+============================
+This is the project requirements document.
+
+Example scenario-std.ppsx:
+==================
+A slide show to illustrate the example scenario described in page 6 of the project doc.
+
+Project Framework: 
+=============
+The part of the code given and students should extend to complete the project
+you should open the solution file PT-Project.sln  using visual studio 2022 
+
+VC Graphis Library:
+============= 
+Graphics library students should use for Graphical drawings & inputs. 
+It is already integrated with the project framework code
+It is recommended to run the library separetly to see it capabilities
+Inside the folder there is a help file named "Manual.txt"
+
+
+
+
+
+
