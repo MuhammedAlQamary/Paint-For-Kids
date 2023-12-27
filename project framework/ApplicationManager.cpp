@@ -1,6 +1,6 @@
 #include "ApplicationManager.h"
 #include "Actions\ActionAddSquare.h"
-
+#include "Actions\ActionSelect.h"
 
 //Constructor
 ApplicationManager::ApplicationManager() : mode(0)
@@ -49,6 +49,10 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
+		case DRAWING_AREA:
+			newAct = new ActionSelect(this);
+			break;
+
 		case DRAW_SQUARE:
 			newAct = new ActionAddSquare(this);
 			break;
@@ -60,7 +64,7 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 
 		case EXIT:
 			///create ExitAction here
-			newAct = new ActionExit(this);
+			//newAct = new ActionExit(this);
 			break;
 		
 		case STATUS:	//a click on the status bar ==> no action
@@ -84,8 +88,21 @@ void ApplicationManager::ExecuteAction(Action* &pAct)
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
+//==================================================================================//
+//						Figures Management Functions								//
+//==================================================================================//
 
 //Add a figure to the list of figures
+CFigure** ApplicationManager::getFigList(){
+	return FigList;
+};
+int* ApplicationManager::getFigCount() {
+	return &FigCount;
+};
+int* ApplicationManager::getSelectedFigCount() {
+	return &selectedFigCount;
+	
+};
 void ApplicationManager::AddFigure(CFigure* pFig)
 {
 	if(FigCount < MaxFigCount )
@@ -97,11 +114,21 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 	//If a figure is found return a pointer to it.
 	//if this point (x,y) does not belong to any figure return NULL
 
-
-	///Add your code here to search for a figure given a point x,y	
-
+	for (int i = FigCount - 1; i >= 0; i--)
+		if (FigList[i]->Get(x, y))
+			return FigList[i];
 	return NULL;
 }
+////////////////////////////////////////////////////////////////////////////////////////
+CFigure* ApplicationManager::GetSelectedFigure() const
+{
+	//check if a figure selected
+ 	for (int i = (FigCount - 1); i >= 0; i--) {
+		if (FigList[i]->IsSelected()) return FigList[i];
+	}
+	return NULL;
+}
+
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//
