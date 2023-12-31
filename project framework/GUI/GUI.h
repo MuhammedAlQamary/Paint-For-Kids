@@ -33,7 +33,13 @@ public:
 	void ClearDrawArea() const;	//Clears the drawing area
 	
 	// -- Figures Drawing functions
-	void DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected=false) const;  //Draw a Square
+	void DrawLine		(Point P1, Point P2,	GfxInfo LineGfxInfo, bool selected = false) const;			//Draw a Line
+	void DrawSquare		(Point P1, int length,	GfxInfo SquareGfxInfo, bool selected = false) const;		//Draw a Square
+	void DrawRectangle	(Point P1, Point P2,	GfxInfo RectGfxInfo, bool selected = false) const;		//Draw a Rectangle
+	void DrawEllipse	(Point P1, Point P2,	GfxInfo EllipseGfxInfo, bool selected = false) const;		//Draw a Rectangle
+	void DrawCircle		(Point P1, int length,	GfxInfo CircleGfxInfo, bool selected = false) const;		//Draw a Circle
+	void DrawTringle	(Point P1,	Point P2,	Point P3,	GfxInfo TringleGfxInfo, bool selected = false) const;		//Draw a Tringle
+
 	
 	///TODO: Make similar functions for drawing all other figures.
 	

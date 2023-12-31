@@ -1,6 +1,24 @@
 #include "ApplicationManager.h"
-#include "Actions\ActionAddSquare.h"
+#include "Actions/ActionAddLine.h"
+#include "Actions/ActionAddSquare.h"
+#include "Actions/ActionAddRectangle.h"
+#include "Actions/ActionAddEllipse.h"
+#include "Actions/ActionAddCircle.h"
+#include "Actions/ActionAddTringle.h"
+#include "Actions/ActionExit.h"
+#include "Actions/ActionSave.h"
 
+//Figures
+#include "Figures/CFigure.h"
+#include "Figures/CLine.h"
+#include "Figures/CRectangle.h"
+#include "Figures/CSquare.h"
+#include "Figures/CEllipse.h"
+#include "Figures/CCircle.h"
+#include "Figures/CTringle.h"
+
+#include <fstream>
+using namespace std;
 
 //Constructor
 ApplicationManager::ApplicationManager() : mode(0)
@@ -49,13 +67,29 @@ Action* ApplicationManager::CreateAction(ActionType ActType)
 	//According to Action Type, create the corresponding action object
 	switch (ActType)
 	{
+		case DRAW_LINE:
+			newAct = new ActionAddLine(this);
+			break;
+
+		case DRAW_RECTANGLE:
+			newAct = new ActionAddRectangle(this);
+			break;
+
 		case DRAW_SQUARE:
 			newAct = new ActionAddSquare(this);
 			break;
 
 		case DRAW_ELPS:
 			///create AddLineAction here
+			newAct = new ActionAddEllipse(this);
+			break;
 
+		case DRAW_CIRC:
+			newAct = new ActionAddCircle(this);
+			break;
+
+		case DRAW_TRI:
+			newAct = new ActionAddTringle(this);
 			break;
 
 		case EXIT:
@@ -81,6 +115,18 @@ void ApplicationManager::ExecuteAction(Action* &pAct)
 		pAct = NULL;
 	}
 }
+//void ApplicationManager::SaveAll(ofstream &outputfile) {
+//	// Figure save Functions Run
+//	if (outputfile.is_open())
+//	{
+//		outputfile << to_string(FigCount) << "\n";
+//		for (int i = 0; i < FigCount; i++)
+//		{
+//			FigList[i]->Save(outputfile);
+//		}
+//	}
+//
+//}
 //==================================================================================//
 //						Figures Management Functions								//
 //==================================================================================//
@@ -102,6 +148,29 @@ CFigure *ApplicationManager::GetFigure(int x, int y) const
 
 	return NULL;
 }
+//void ApplicationManager::AddSelectedFigure(CFigure* pFig)
+//{
+//	set<CFigure*>::iterator it = SelectedFigList.find(pFig);
+//	if (SelectedFigCount < MaxFigCount && it == SelectedFigList.end()) {
+//		SelectedFigList.insert(pFig);
+//		SelectedFigCount++;
+//	}
+//	else if (it != SelectedFigList.end()) {
+//		SelectedFigList.erase(pFig);
+//		pFig->SetSelected(false);
+//		SelectedFigCount--;
+//	}
+//}
+//
+//void ApplicationManager::UnSelectFigures()
+//{
+//	for (set<CFigure*>::iterator it = SelectedFigList.begin(); it != SelectedFigList.end(); it++)
+//		(*it)->SetSelected(false);
+//	SelectedFigList.clear();
+//	SelectedFigCount = 0;
+//}
+
+
 //==================================================================================//
 //							Interface Management Functions							//
 //==================================================================================//

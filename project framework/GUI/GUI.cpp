@@ -46,6 +46,7 @@ void GUI::GetPointClicked(int &x, int &y) const
 	pWind->WaitMouseClick(x, y);	//Wait for mouse click
 }
 
+
 string GUI::GetSrting() const 
 {
 	string Label;
@@ -53,12 +54,18 @@ string GUI::GetSrting() const
 	while(1)
 	{
 		pWind->WaitKeyPress(Key);
-		if(Key == 27 )	//ESCAPE key is pressed
+		if (Key == 27)							// 27 ESCAPE key is pressed
 			return "";	//returns nothing as user has cancelled label
-		if(Key == 13 )	//ENTER key is pressed
+		else if (Key == 13)						// 13 ENTER key is pressed
 			return Label;
-		if(Key == 8 )	//BackSpace is pressed
-			Label.resize(Label.size() -1 );			
+		//else if (Key == 110 || Key == 78)
+		//	return "";
+		if (Key == 8)							// 08 BackSpace
+		{
+			if (Label.size() > 0)
+				Label.resize(Label.size() - 1);
+
+		}
 		else
 			Label+= Key;
 		PrintMessage(Label);
@@ -84,8 +91,12 @@ ActionType GUI::MapInputToActionType() const
 
 			switch (ClickedItemOrder)
 			{
+			case ITM_LIN : return DRAW_LINE;
+			case ITM_REC: return DRAW_RECTANGLE;
 			case ITM_SQUR: return DRAW_SQUARE;
 			case ITM_ELPS: return DRAW_ELPS;
+			case ITM_CIRC: return DRAW_CIRC;
+			case ITM_TRI: return DRAW_TRI;
 			case ITM_EXIT: return EXIT;	
 			
 			default: return EMPTY;	//A click on empty place in desgin toolbar
@@ -149,10 +160,14 @@ void GUI::CreateDrawToolBar() const
 	//To control the order of these images in the menu, 
 	//reoder them in UI_Info.h ==> enum DrawMenuItem
 	string MenuItemImages[DRAW_ITM_COUNT];
+	MenuItemImages[ITM_LIN] = "images\\MenuItems\\Menu_Lin.jpg";
+	MenuItemImages[ITM_REC] = "images\\MenuItems\\Menu_Rectangle.jpg";
 	MenuItemImages[ITM_SQUR] = "images\\MenuItems\\Menu_Sqr.jpg";
-	MenuItemImages[ITM_ELPS] = "images\\MenuItems\\Menu_Elps.jpg";
+	MenuItemImages[ITM_ELPS] = "images\\MenuItems\\Menu_Ellipse.jpg";
+	MenuItemImages[ITM_CIRC] = "images\\MenuItems\\Menu_Circle.jpg";
+	MenuItemImages[ITM_TRI] = "images\\MenuItems\\Menu_Tringle.jpg";
 	MenuItemImages[ITM_EXIT] = "images\\MenuItems\\Menu_Exit.jpg";
-	MenuItemImages[ITM_SELECT] = "images\\MenuItems\\Menu_Select.jpg";
+	//MenuItemImages[ITM_SELECT] = "images\\MenuItems\\Menu_Select.jpg";
 
 	//TODO: Prepare images for each menu item and add it to the list
 
@@ -210,7 +225,58 @@ int GUI::getCrntPenWidth() const		//get current pen width
 //								Figures Drawing Functions								//
 //======================================================================================//
 
-void GUI::DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected) const
+void GUI::DrawLine(Point P1, Point P2, GfxInfo LineGfxInfo, bool selected) const
+{
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = LineGfxInfo.DrawClr;
+
+	pWind->SetPen(DrawingClr, LineGfxInfo.BorderWdth);	//Set Drawing color & width
+
+	drawstyle style;
+	if (LineGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(LineGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+
+
+	//pWind->DrawRectangle(P1.x, P1.y, P1.x + length, P1.y + length, style);
+	pWind->DrawLine(P1.x, P1.y, P2.x, P2.y, style);
+
+}
+
+
+void GUI::DrawSquare(Point P1, int length, GfxInfo SquareGfxInfo, bool selected) const
+{
+	color DrawingClr;
+	if(selected)	
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else			
+		DrawingClr = SquareGfxInfo.DrawClr;
+	
+	pWind->SetPen(DrawingClr, SquareGfxInfo.BorderWdth);	//Set Drawing color & width
+	
+	drawstyle style;
+	if (SquareGfxInfo.isFilled)
+	{
+		style = FILLED;		
+		pWind->SetBrush(SquareGfxInfo.FillClr);
+	}
+	else	
+		style = FRAME;
+
+	
+	pWind->DrawRectangle(P1.x, P1.y, P1.x +length, P1.y+length, style);
+	pWind->DrawLine(P1.x, P1.y, P1.x + length, P1.y + length, style);
+
+}
+
+void GUI::DrawRectangle(Point P1, Point P2, GfxInfo RectGfxInfo, bool selected) const
 {
 	color DrawingClr;
 	if(selected)	
@@ -230,10 +296,111 @@ void GUI::DrawSquare(Point P1, int length, GfxInfo RectGfxInfo, bool selected) c
 		style = FRAME;
 
 	
-	pWind->DrawRectangle(P1.x, P1.y, P1.x +length, P1.y+length, style);
-	pWind->DrawLine(P1.x, P1.y, P1.x + length, P1.y + length, style);
+	pWind->DrawRectangle(P1.x, P1.y, P2.x, P2.y, style);
+	//pWind->DrawLine		(P1.x, P1.y, P1.x + length, P1.y + length, style);
 
 }
+
+void GUI::DrawEllipse(Point P1, Point P2, GfxInfo EllipseGfxInfo, bool selected) const
+{
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = EllipseGfxInfo.DrawClr;
+
+	pWind->SetPen(DrawingClr, EllipseGfxInfo.BorderWdth);	//Set Drawing color & width
+
+	drawstyle style;
+	if (EllipseGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(EllipseGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+
+
+	//pWind->DrawRectangle(P1.x, P1.y, P1.x + length, P1.y + length, style);
+	pWind->DrawEllipse(P1.x, P1.y, P2.x, P2.y, style);
+
+}
+
+void GUI::DrawCircle(Point P1, int length, GfxInfo CircleGfxInfo, bool selected) const
+{
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = CircleGfxInfo.DrawClr;
+
+	pWind->SetPen(DrawingClr, CircleGfxInfo.BorderWdth);	//Set Drawing color & width
+
+	drawstyle style;
+	if (CircleGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(CircleGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+
+
+	//pWind->DrawRectangle(P1.x, P1.y, P1.x + length, P1.y + length, style);
+	pWind->DrawCircle(P1.x, P1.y, length, style);
+
+}
+
+//void GUI::DrawCircle(Point P1, int length, GfxInfo CircleGfxInfo, bool selected) const
+//{
+//	color DrawingClr;
+//	if (selected)
+//		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+//	else
+//		DrawingClr = CircleGfxInfo.DrawClr;
+//
+//	pWind->SetPen(DrawingClr, CircleGfxInfo.BorderWdth);	//Set Drawing color & width
+//
+//	drawstyle style;
+//	if (CircleGfxInfo.isFilled)
+//	{
+//		style = FILLED;
+//		pWind->SetBrush(CircleGfxInfo.FillClr);
+//	}
+//	else
+//		style = FRAME;
+//
+//
+//	//pWind->DrawRectangle(P1.x, P1.y, P1.x + length, P1.y + length, style);
+//	pWind->DrawCircle(P1.x, P1.y, length, style);
+//
+//}
+
+void GUI::DrawTringle(Point P1, Point P2, Point P3, GfxInfo TringleGfxInfo, bool selected) const
+{
+	color DrawingClr;
+	if (selected)
+		DrawingClr = UI.HighlightColor; //Figure should be drawn highlighted
+	else
+		DrawingClr = TringleGfxInfo.DrawClr;
+
+	pWind->SetPen(DrawingClr, TringleGfxInfo.BorderWdth);	//Set Drawing color & width
+
+	drawstyle style;
+	if (TringleGfxInfo.isFilled)
+	{
+		style = FILLED;
+		pWind->SetBrush(TringleGfxInfo.FillClr);
+	}
+	else
+		style = FRAME;
+
+
+	pWind->DrawTriangle(P1.x, P1.y, P2.x, P2.y, P3.x, P3.y, style);
+	//pWind->DrawLine(P1.x, P1.y, P1.x + length, P1.y + length, style);
+
+}
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
