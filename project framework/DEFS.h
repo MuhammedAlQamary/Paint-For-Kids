@@ -3,11 +3,15 @@
 
 #include "CMUgraphicsLib\CMUgraphics.h"
 
-//This file contais some global constants and definitions to be used in the project.
+//This file contains some global constants and definitions to be used in the project.
 enum ActionType //The actions supported (you can add more if needed)
 {
+	DRAW_LINE,		//Draw a Line
+	DRAW_RECTANGLE,	//Draw a RECTANGLE
 	DRAW_SQUARE,	//Draw a Square
 	DRAW_ELPS,		//Draw an Ellipse
+	DRAW_CIRC,		//Draw an Circle
+	DRAW_TRI,		//Draw an Circle
 	DRAW_HEX,		//Draw a Hexagon
 	CHNG_DRAW_CLR,	//Change the drawing color
 	CHNG_FILL_CLR,	//Change the filling color

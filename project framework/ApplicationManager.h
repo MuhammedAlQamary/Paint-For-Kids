@@ -18,7 +18,11 @@ private:
 
 	//Pointers to Input and Output classes
 	GUI* pGUI;
-	
+	// string LastMessage;
+
+	//Pointer to the selected figure
+	CFigure* SelectedFig; 
+
 
 public:	
 	ApplicationManager(); 
@@ -35,6 +39,9 @@ public:
 	int* getFigCount();
 	int* getSelectedFigCount();
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
+	void AddSelectedFigure(CFigure* pFig);
+	void ApplicationManager::UnSelectFigures();
+
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
 	CFigure* GetSelectedFigure() const;
 		

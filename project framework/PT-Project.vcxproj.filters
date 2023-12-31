@@ -142,6 +142,19 @@
     <ClCompile Include="Actions\ActionAddSquare.cpp">
       <Filter>Action Classes</Filter>
     </ClCompile>
+    <ClCompile Include="Actions\ActionExit.cpp" />
+    <ClCompile Include="Actions\ActionSave.cpp" />
+    <ClCompile Include="Actions\ActionAddLine.cpp" />
+    <ClCompile Include="Figures\CLine.cpp" />
+    <ClCompile Include="Figures\CRectangle.cpp" />
+    <ClCompile Include="Actions\ActionAddRectangle.cpp" />
+    <ClCompile Include="Figures\CEllipse.cpp" />
+    <ClCompile Include="Actions\ActionAddEllipse.cpp" />
+    <ClCompile Include="Figures\CCircle.cpp" />
+    <ClCompile Include="Actions\ActionAddCircle.cpp" />
+    <ClCompile Include="Figures\CTringle.cpp" />
+    <ClCompile Include="Actions\ActionAddTringle.cpp" />
+    <ClCompile Include="Actions\ActionSelect.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CMUgraphicsLib\auxil.h">
@@ -226,5 +239,18 @@
     <ClInclude Include="Actions\ActionAddSquare.h">
       <Filter>Action Classes</Filter>
     </ClInclude>
+    <ClInclude Include="Actions\ActionExit.h" />
+    <ClInclude Include="Actions\ActionSave.h" />
+    <ClInclude Include="Actions\ActionAddLine.h" />
+    <ClInclude Include="Figures\CLine.h" />
+    <ClInclude Include="Figures\CRectangle.h" />
+    <ClInclude Include="Actions\ActionAddRectangle.h" />
+    <ClInclude Include="Figures\CEllipse.h" />
+    <ClInclude Include="Actions\ActionAddEllipse.h" />
+    <ClInclude Include="Figures\CCircle.h" />
+    <ClInclude Include="Actions\ActionAddCircle.h" />
+    <ClInclude Include="Figures\CTringle.h" />
+    <ClInclude Include="Actions\ActionAddTringle.h" />
+    <ClInclude Include="Actions\ActionSelect.h" />
   </ItemGroup>
 </Project>

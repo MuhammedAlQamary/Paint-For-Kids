@@ -320,7 +320,6 @@ window::~window() {
 
 }
 
-
 inline void window::ProcessMessage() {
 
     MSG msgStruct;
@@ -1213,7 +1212,6 @@ void window::GetDoubleSize(int &iWidth, int &iHeight, const double dNumber) {
 
 }
 
-
 void window::DrawImage(const image *imgThis, const int iX, const int iY, const int iWidth, const int iHeight) {
 
     ProcessMessage(); // Kludge
@@ -1303,7 +1301,6 @@ color window::GetColor(const int iX, const int iY) {
 
 }
 
-
 void window::GetColor(const int iX, const int iY, double &dRed, double &dGreen, double &dBlue) {
 
   color colTemp;
@@ -1315,7 +1312,6 @@ void window::GetColor(const int iX, const int iY, double &dRed, double &dGreen, 
   dBlue = (colTemp.ucBlue / 255.0);
 
 }
-
 
 double window::GetRed(const int iX, const int iY) {
 
@@ -1346,7 +1342,6 @@ double window::GetBlue(const int iX, const int iY) {
   return (colTemp.ucBlue / 255.0);
 
 }
-
 
 void window::StoreImage(image *imgThis, const unsigned usX, const unsigned short usY, const unsigned short usWidth, const unsigned short usHeight) {
 

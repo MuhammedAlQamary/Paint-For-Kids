@@ -17,13 +17,17 @@ enum DrawMenuItem //The items of the Draw menu (you should add more items)
 {
 	//Note: Items are ordered here as they appear in menu
 	//If you want to change the menu items order, change the order here
+	ITM_LIN,		//Line item in menu
+	ITM_REC,		//Rectangle item in menu
 	ITM_SQUR,		//Square item in menu
 	ITM_ELPS,		//Ellipse item in menu
+	ITM_CIRC,		//Circle item in menu
+	ITM_TRI,		//Tringle item in menu
 	
 	//TODO: Add more items names here
 
 	ITM_EXIT,		//Exit item
-	ITM_SELECT,		// item
+//	ITM_SELECT,		// item
 	
 	DRAW_ITM_COUNT		//no. of menu items ==> This should be the last line in this enum
 	

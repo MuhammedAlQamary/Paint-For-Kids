@@ -1,15 +1,21 @@
-#include "ActionSelect.h" // Include the header file for ActionSelect class
-#include <iostream> // Include the standard input/output stream library
-#include "..\ApplicationManager.h" // Include the header file for ApplicationManager class
-#include <string> // Include the string library
-#include <iostream> // Include the standard input/output stream library again
 
-int ActionSelect::selectedEllipses = 0; // Initialize the static member variable selectedEllipses to 0
-int ActionSelect::selectedHexagons = 0; // Initialize the static member variable selectedHexagons to 0
-int ActionSelect::selectedSquares = 0; // Initialize the static member variable selectedSquares to 0
+#include "ActionSelect.h"
+#include "../Figures/CFigure.h"
+#include "../ApplicationManager.h"
+#include "../GUI/GUI.h"
+#include "../GUI/Input.h"
+#include "../GUI/Output.h"
 
-ActionSelect::ActionSelect(ApplicationManager* pApp) :Action(pApp) ///constructor chaining
+ActionSelect :: ActionSelect(ApplicationManager* pApp) : Action(pApp)
 {
+
+}
+
+void ActionSelect::ReadActionParameters()
+{
+	//Input* pIn = pManager->GetInput();
+	//Output* pOut = pManager->GetOutput();
+	
 
 }
 
@@ -54,3 +60,7 @@ void ActionSelect::Execute()
 	
 	
 
+	ReadActionParameters();
+	// pManager->UnSelectFigures()
+	pManager->UpdateInterface();
+}

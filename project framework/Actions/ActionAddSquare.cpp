@@ -1,8 +1,6 @@
 #include "ActionAddSquare.h"
 #include "..\Figures\CSquare.h"
-
 #include "..\ApplicationManager.h"
-
 #include "..\GUI\GUI.h"
 
 ActionAddSquare::ActionAddSquare(ApplicationManager * pApp):Action(pApp)
@@ -35,7 +33,7 @@ void ActionAddSquare::Execute()
 	//Read 2nd point and store in point P2
 	pGUI->GetPointClicked(P2.x, P2.y);
 
-	pGUI->ClearStatusBar();
+	pGUI->ClearStatusBar(); // Clear  All Text in Status Bar
 
 
 	//Step 2 - prepare square data
@@ -51,8 +49,8 @@ void ActionAddSquare::Execute()
 
 		
 	//Step 3 - Create a Square with the parameters read from the user
-	CSquare *R=new CSquare(topLeft, SideLength, SqrGfxInfo);
+	CSquare *S = new CSquare(topLeft, SideLength, SqrGfxInfo);
 
 	//Step 4 - Add the Square to the list of figures
-	pManager->AddFigure(R);
+	pManager->AddFigure(S);
 }
