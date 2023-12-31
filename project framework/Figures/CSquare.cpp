@@ -14,3 +14,11 @@ void CSquare::DrawMe(GUI* pGUI) const
 	
 
 }
+	
+bool CSquare::Get(int x, int y) const
+{
+	if (x>=TopLeftCorner.x&&x<=TopLeftCorner.x+ length&&
+		y>= TopLeftCorner.y&& TopLeftCorner.y+length)
+		return true;
+	return false;
+}

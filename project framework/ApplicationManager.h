@@ -35,11 +35,15 @@ public:
 	void ExecuteAction(Action*&) ; //Execute an action
 	
 	// -- Figures Management Functions
+	CFigure** getFigList();
+	int* getFigCount();
+	int* getSelectedFigCount();
 	void AddFigure(CFigure* pFig); //Adds a new figure to the FigList
 	void AddSelectedFigure(CFigure* pFig);
 	void ApplicationManager::UnSelectFigures();
 
 	CFigure *GetFigure(int x, int y) const; //Search for a figure given a point inside the figure
+	CFigure* GetSelectedFigure() const;
 		
 	// -- Interface Management Functions	
 	GUI *GetGUI() const; //Return pointer to the interface
